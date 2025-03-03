@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SONGS</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            text-align: center;
+            background-color: #ffd1dc; /* Light pink background */
+            color: #b22222; /* Deep red text */
+        }
+        .player { 
+            margin-top: 20px; 
+            padding: 20px;
+            background: #ffebef; /* Soft pink box */
+            border-radius: 15px;
+            display: inline-block;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        #playerImage {
+            width: 150px;
+            height: 150px;
+            border-radius: 15px;
+            margin-bottom: 10px;
+            object-fit: cover;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        #playlist { 
+            margin-top: 10px; 
+            list-style: none; 
+            padding: 0; 
+        }
+        #playlist li { 
+            cursor: pointer; 
+            padding: 10px; 
+            background: #fff5f8; /* Lighter pink for song items */
+            margin: 5px;
+            border-radius: 10px;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+        }
+        #playlist li:hover { 
+            background-color: #ffccd5; /* Slightly darker pink on hover */
+        }
+        #playlist img {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            margin-right: 10px;
+        }
+        h1 {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 28px;
+        }
+        .next-page {
+            margin-top: 20px;
+        }
+        .next-page a {
+            text-decoration: none;
+            background: #ff4d6d;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            display: inline-block;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .next-page a:hover {
+            background: #e60039;
+        }
+    </style>
+</head>
+<body>
+    <h1>🌸 THESE ARE SOME SONGS DEDICATED TO YOU 🌸</h1>
+    <div class="player">
+        <img id="playerImage" src="images/default.jpg" alt="Now Playing">
+        <audio id="audioPlayer" controls></audio>
+        <ul id="playlist"></ul>
+    </div>
+    
+    <div class="next-page">
+        <a href="https://kakarotnegi.github.io/Apology/">Next Page ➡️</a>
+    </div>
+    
+    <script>
+        const audioPlayer = document.getElementById('audioPlayer');
+        const playlist = document.getElementById('playlist');
+        const playerImage = document.getElementById('playerImage');
+        
+        // List of stored music files with images
+        const songs = [
+            { name: "Blue", url: "songs/blue.mp3", image: "images/blue.jpg" },
+            { name: "CO2", url: "songs/co2.mp3", image: "images/co2.jpg" },
+            { name: "Die With The Smile", url: "songs/die-with-the-smile.mp3", image: "images/die-with-the-smile.jpg" },
+            { name: "A Thousand Years", url: "songs/a-thousand-years.mp3", image: "images/a-thousand-years.jpg" },
+            { name: "Until I Found You", url: "songs/until-i-found-you.mp3", image: "images/until-i-found-you.jpg" },
+            { name: "Perfect", url: "songs/perfect.mp3", image: "images/perfect.jpg" },
+            { name: "I Wanna Be Yours", url: "songs/I-Wanna-Be-Yours.mp3", image: "images/I-Wanna-Be-Yours.jpg" }
+            
+        ];
+        
+        songs.forEach((song, index) => {
+            const listItem = document.createElement('li');
+            const img = document.createElement('img');
+            img.src = song.image;
+            img.alt = song.name;
+            const text = document.createTextNode(song.name);
+            
+            listItem.appendChild(img);
+            listItem.appendChild(text);
+            listItem.addEventListener('click', () => playSong(index));
+            playlist.appendChild(listItem);
+        });
+        
+        function playSong(index) {
+            audioPlayer.src = songs[index].url;
+            playerImage.src = songs[index].image;
+            audioPlayer.play();
+        }
+    </script>
+</body>
+</html>
